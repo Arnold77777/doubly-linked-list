@@ -9,7 +9,8 @@ class LinkedList {
 
     append(data) {
         var node = new Node(data);
-        if(!this._head){
+
+        if (!this._head) {
             this._head = node;
             this._tail = node;
         }
@@ -19,45 +20,43 @@ class LinkedList {
             this._tail = node;
         }
 
-         this.length++;
-         return this;
+        this.length++;
+        return this;
 
     }
 
     head() {
-        if(!this._head) return null;
+        if (!this._head) return null;
         return this._head.data;
     }
 
     tail() {
-        if(!this._tail) return null;
+        if (!this._tail) return null;
         return this._tail.data;
     }
 
     at(index) {
 
-        if(index > this.length || index < 0) return false;
+        if (index > this.length || index < 0) return false;
 
         var current = this.search(index);
-
         return current.data;
-      
 
     }
 
     insertAt(index, data) {
-        if(index > this.length || index < 0) throw new Error("IndexError. Wrong index.");
+        if (index > this.length || index < 0) throw new Error("Wrong index.");
         var node = new Node(data);
 
        
         var current = this.search(index);
 
-        if(!current) {
+        if (!current) {
             this.append(data);
             return this;
         }
 
-        else if(current === this._head) { 
+        else if (current === this._head) { 
             node.next = current;
             current.prev = node;
             this._head = node;                        
@@ -75,7 +74,7 @@ class LinkedList {
     }
 
     isEmpty() {
-        if(!this.length) return true;
+        if (!this.length) return true;
         return false;
 
     }
@@ -88,24 +87,23 @@ class LinkedList {
     }
 
     deleteAt(index) {
-    if(index > this.length || index < 0) throw new Error("IndexError. Wrong index.");
+    if (index > this.length || index < 0) throw new Error("Wrong index.");
 
         var current = this.search(index);
 
-        if(current === this._head) {
-            if(current.next)  current.next.prev = null;         
+        if (current === this._head) {
+            if (current.next)  current.next.prev = null;         
             else this._tail = null;
 
             this._head = current.next;  
 
         }
 
-        else if(current === this._tail) {
+        else if (current === this._tail) {
             current.prev.next = null;
             this._tail = current.prev;
 
         }
-
         else {
             current.prev.next = current.next;
             current.next.prev = current.prev;
@@ -119,18 +117,17 @@ class LinkedList {
 
     reverse() {
         var current = this._tail;
-        while(current) {
+        while (current) {
             let temp = current.prev;
             current.prev = current.next;
             current.next = temp;
 
-            current =temp;
+            current = temp;
         }
 
         let temp = this._head;
         this._head = this._tail;
-        this._tail = temp;    
-
+        this._tail = temp;
         return this;
 
     }
@@ -138,26 +135,23 @@ class LinkedList {
     indexOf(data) {
         var current = this._head;
         var i = 0;
-        while(current) {
-            if(current.data === data) return i;
+        while (current) {
+            if (current.data === data) return i;
             current = current.next;
             i++;
         }
-
         return -1;
 
     }
 
     search(index) {
-         var i = 0;
-         var current = this._head;
+        var i = 0;
+        var current = this._head;
        
-
-        while(index!==i) {
+        while(index !== i) {
             current = current.next;
             i++;
         }
-
         return current;
     }
 }
